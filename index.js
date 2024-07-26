@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = 3000;
 const TodoModel = require('./TodoAppModel/Todo');
 const app = express();
 
@@ -10,8 +9,12 @@ require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
-app.listen({ port }, () => {
-    console.log("App is running at http://localhost:", port);
+
+// Use the port provided by Vercel or fallback to 3000 for local development
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`App is running at http://localhost:${port}`);
 });
 
 // Connecting to MongoDB Server using environment variable
